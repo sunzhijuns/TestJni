@@ -22,7 +22,7 @@ public class NBitmapLib {
         int color;
         int av;
         int alpha;
-        Log.i("数组大小pixelArray.length",""+pixelArray.length);
+//        Log.i("数组大小pixelArray.length",""+pixelArray.length);
         for (int i = 0; i<pixelArray.length;i++){
             color = pixelArray[i];
             alpha = color >> 24;

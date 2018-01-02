@@ -10,6 +10,7 @@ import android.util.Log;
 public class NBitmapLib {
     public static native void renderGray(Bitmap bitmap);
 
+    //ARGB_4444
     public static void javaRenderGray(Bitmap bitmap){
         int MODEL = 0xFF;
         int height = bitmap.getHeight();
@@ -20,15 +21,18 @@ public class NBitmapLib {
 
         int color;
         int av;
+        int alpha;
         Log.i("数组大小pixelArray.length",""+pixelArray.length);
         for (int i = 0; i<pixelArray.length;i++){
             color = pixelArray[i];
+            alpha = color >> 24;
             av = 0;
             av += color & MODEL;
-            av += (color >> 8) & MODEL + av;
-            av += (color >> 16) & MODEL + av;
+            av += (color >> 8) & MODEL;
+            av += (color >> 16) & MODEL;
             av /= 3;
-            color = (color >> 16) & 0xFF00 + av;
+
+            color = (alpha << 8) + av;
             color = (color << 8) + av;
             color = (color << 8) + av;
 

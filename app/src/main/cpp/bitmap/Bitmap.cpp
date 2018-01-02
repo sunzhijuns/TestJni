@@ -25,16 +25,20 @@ Java_com_szj_testjni_NBitmapLib_renderGray(JNIEnv *env, jclass type, jobject bit
     ABsize length = height * width;
     for (ABsize i = 0; i < length; ++i) {
         av = 0;
-        alpha = color & MODEL;
+
         color = pixelArray[i];
+
+        alpha = color & MODEL;
+
         av += (color >>= 4) & MODEL;
         av += (color >>= 4) & MODEL;
-        av += (color >> 4) & MODEL;
+        av += (color >>= 4) & MODEL;
         av /= 3;
+
         color = av;
         color = (color << 4) + av;
         color = (color << 4) + av;
-        color += alpha;
+        color = (color << 4) + alpha;
 
         pixelArray[i] = color;
     }

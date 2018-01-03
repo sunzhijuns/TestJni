@@ -8,5 +8,6 @@ import android.app.Application
 class NDKApplication :Application(){
     init {
         System.loadLibrary("native-lib")
+        System.loadLibrary("native-activity")
     }
 }

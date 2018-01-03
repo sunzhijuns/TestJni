@@ -19,6 +19,16 @@
         </activity>
         <activity android:name=".HelloJavaActivity"/>
         <activity android:name=".NBitmapActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name="android.app.NativeActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="native-activity"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

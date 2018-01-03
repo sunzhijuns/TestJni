@@ -18,8 +18,11 @@ add_library( # Sets the name of the library.
 
              # Provides a relative path to your source file(s).
              src/main/cpp/native-lib.cpp 
-			 src/main/cpp/bitmap/Bitmap.cpp )
-			 
+			 src/main/cpp/bitmap/Bitmap.cpp)
+
+add_library(native-activity 
+			SHARED 
+			src/main/cpp/native_activity/native-activity.cpp)		 
 
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -55,3 +58,10 @@ target_link_libraries( # Specifies the target library.
                        ${log-lib}
 					   jnigraphics
 					   ${android-lib})
+					   
+					   
+target_link_libraries(native-activity
+			android
+			EGL
+			GLESv1_CM
+			log)

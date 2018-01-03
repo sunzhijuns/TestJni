@@ -1,7 +1,9 @@
 package com.szj.testjni
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.szj.testjni.triangle.TriangleActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +14,11 @@ class MainActivity : AppCompatActivity() {
 
         // Example of a call to a native method
         sample_text.text = stringFromJNI()
+
+        btn_draw_triangle.setOnClickListener {
+            var intent = Intent(this,TriangleActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     /**
@@ -20,11 +27,4 @@ class MainActivity : AppCompatActivity() {
      */
     external fun stringFromJNI(): String
 
-//    companion object {
-//
-//        // Used to load the 'native-lib' library on application startup.
-//        init {
-//            System.loadLibrary("native-lib")
-//        }
-//    }
 }

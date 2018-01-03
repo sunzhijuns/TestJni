@@ -5,6 +5,21 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+
+
+#如果当前系统版本过低设置拒绝编译
+if(${ANDROID_PLATFORM_LEVEL} LESS 11)
+	message(FATAL_ERROR "OpenGL 2 is not supported before API level 11(current using ${ANDROID_PLATFORM_LEVEL})")
+	return()
+elseif (${ANDROID_PLATFORM_LEVEL} LESS 18)
+	add_definitions("-DDYNAMIC_ES3")
+	set(OPENGL_LIB GLESv2)
+else ()
+	set(OPENGL_LIB GLESv3)
+endif(${ANDROID_PLATFORM_LEVEL} LESS 11)
+
+
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -22,7 +37,11 @@ add_library( # Sets the name of the library.
 
 add_library(native-activity 
 			SHARED 
-			src/main/cpp/native_activity/native-activity.cpp)		 
+			src/main/cpp/native_activity/native-activity.cpp)					
+			
+add_library(triangle-lib 
+			SHARED 
+			src/main/cpp/triangle/triangle-lib.cpp)	
 
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -65,3 +84,11 @@ target_link_libraries(native-activity
 			EGL
 			GLESv1_CM
 			log)
+			
+			
+target_link_libraries(triangle-lib 
+			${OPENGL_LIB}
+			android
+			EGL
+			log
+			m)

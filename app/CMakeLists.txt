@@ -41,6 +41,7 @@ add_library(native-activity
 			
 add_library(triangle-lib 
 			SHARED 
+			src/main/cpp/triangle/esUtil.cpp
 			src/main/cpp/triangle/triangle-lib.cpp)	
 
 

@@ -21,4 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        app:layout_constraintTop_toBottomOf="@+id/btn_draw_triangle"
+        android:id="@+id/btn_draw_rect"
+        android:text="绘制矩形"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </android.support.constraint.ConstraintLayout>

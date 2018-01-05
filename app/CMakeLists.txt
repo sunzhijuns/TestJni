@@ -44,6 +44,11 @@ add_library(triangle-lib
 			src/main/cpp/triangle/esUtil.cpp
 			src/main/cpp/triangle/triangle-lib.cpp)	
 
+add_library(rect-lib 
+			SHARED 
+			src/main/cpp/rect/esUtil.cpp
+			src/main/cpp/rect/rect-lib.cpp)	
+
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -88,6 +93,13 @@ target_link_libraries(native-activity
 			
 			
 target_link_libraries(triangle-lib 
+			${OPENGL_LIB}
+			android
+			EGL
+			log
+			m)
+			
+target_link_libraries(rect-lib 
 			${OPENGL_LIB}
 			android
 			EGL

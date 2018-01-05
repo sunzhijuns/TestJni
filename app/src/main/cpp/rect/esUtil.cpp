@@ -55,18 +55,20 @@ GLuint createProgram(const char *vtxSrc, const char *fragSrc) {
 
     vtxShader = createShader(GL_VERTEX_SHADER, vtxSrc);
     if (!vtxShader){
-        ALOGE("创建 着色器 createProgram");
+        ALOGE("创建 着色器 cvtxShader 失败");
         goto exit;
     }
 
     fragShader = createShader(GL_FRAGMENT_SHADER,fragSrc);
     if (!fragShader){
+        ALOGE("创建 着色器 fragShader 失败");
         goto exit;
     }
 
     program = glCreateProgram();
     if (!program){
         checkGlError("glCreateProgram");
+        ALOGE("创建 program 失败");
         goto exit;
     }
 

@@ -49,6 +49,10 @@ add_library(rect-lib
 			src/main/cpp/rect/esUtil.cpp
 			src/main/cpp/rect/rect-lib.cpp)	
 
+add_library(cube-lib 
+			SHARED 
+			src/main/cpp/cube/esUtil.cpp
+			src/main/cpp/cube/cube-lib.cpp)	
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -100,6 +104,13 @@ target_link_libraries(triangle-lib
 			m)
 			
 target_link_libraries(rect-lib 
+			${OPENGL_LIB}
+			android
+			EGL
+			log
+			m)
+			
+target_link_libraries(cube-lib 
 			${OPENGL_LIB}
 			android
 			EGL

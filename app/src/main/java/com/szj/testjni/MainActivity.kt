@@ -3,6 +3,7 @@ package com.szj.testjni
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.szj.testjni.cube.CubeActivity
 import com.szj.testjni.rect.RectActivity
 import com.szj.testjni.triangle.TriangleActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +24,11 @@ class MainActivity : AppCompatActivity() {
 
         btn_draw_rect.setOnClickListener {
             var intent = Intent(this, RectActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_draw_cube.setOnClickListener {
+            var intent = Intent(this, CubeActivity::class.java)
             startActivity(intent)
         }
     }

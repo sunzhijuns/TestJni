@@ -392,8 +392,7 @@ Java_com_szj_testjni_cube_CubeLib_step(JNIEnv *env, jclass type) {
     clock_gettime(CLOCK_MONOTONIC, &now);
     auto nowNs = now.tv_sec * 1000000000ull + now.tv_nsec;
     if (lastFrameNs > 0){
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);
         float dt = float(nowNs - lastFrameNs) * 0.000000001f;
         update(dt);
         glDrawArrays(GL_TRIANGLES,0,36);

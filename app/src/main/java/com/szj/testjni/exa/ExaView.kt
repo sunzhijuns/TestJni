@@ -15,6 +15,12 @@ class ExaView(context:Context):GLSurfaceView(context) {
         setRenderer(TriangleRender())
     }
 
+    override fun onPause() {
+        ExaLib.destory()
+        super.onPause()
+    }
+
+
     class TriangleRender : GLSurfaceView.Renderer {
 
         override fun onDrawFrame(gl: GL10?) {

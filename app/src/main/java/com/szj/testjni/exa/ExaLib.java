@@ -15,4 +15,6 @@ public class ExaLib {
     //用来绘制图像
     public static native void step();
 
+    public static native void destory();
+
 }

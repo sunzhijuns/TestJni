@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 
-#include"esUtil.h"
+
 
 #include <math.h>
 #include <time.h>
@@ -26,8 +26,7 @@
 
 #define LOG_TAG "RECT-LIB"
 
-#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
-
+#include"esUtil.h"
 static const char VERTEX_SHADER[] =
         "#version 300 es\n"
                 "layout(location = " STRV(POS_ATTRIB) ") in vec2 pos;\n"

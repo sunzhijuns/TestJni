@@ -6,19 +6,20 @@
 #define TESTJNI_VERTEXBUFFEROBJECT_H
 
 
-class Render{
+#include "../protol.h"
+
+class VBORender : public Render {
 public:
-    bool  init();
-    Render();
-    ~Render();
-    void resize(int w, int h);
-    void render();
+    VBORender();
+    virtual ~VBORender();
+    virtual bool  init() override;
+    virtual void resize(int w, int h) override;
+    virtual void render() override;
 
-private:
+protected:
 
-    void draw();
+    virtual void draw() override;
     void calcSceneParams(int w, int h);
-    void step();
 };
 
 

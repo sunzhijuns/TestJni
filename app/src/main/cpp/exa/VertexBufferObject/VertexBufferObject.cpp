@@ -9,12 +9,11 @@
 
 #include <jni.h>
 
+#define LOG_TAG "EXA-LIB"
 
 #include "../esUtil.h"
 
-#define LOG_TAG "EXA-LIB"
 
-#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 typedef struct{
     GLuint program;
@@ -74,12 +73,12 @@ static const GLushort INDICES[3] = {0,1,2};
 
 static UserData  userData;
 
-Render::Render(){
+VBORender::VBORender(){
 
     return;
 }
 
-bool Render::init() {
+bool VBORender::init() {
 
     GLuint program = createProgram(VERTEX_SHADER,FRAGMENT_SHADER);
     if (!program){
@@ -95,9 +94,8 @@ bool Render::init() {
     return true;
 }
 
-
-Render::~Render() {
-    ALOGE("删除 program ~Render");
+VBORender::~VBORender() {
+    ALOGE("删除 program VBOGen3Render3Render");
     if (userData.program){
         glDeleteProgram(userData.program);
     }
@@ -105,27 +103,19 @@ Render::~Render() {
     userData.vboIds[0] = 0;
     userData.vboIds[1] = 0;
 
-
 }
 
-void Render::resize(int w, int h) {
+void VBORender::resize(int w, int h) {
     glViewport(0,0,w,h);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Render::calcSceneParams(int w, int h) {
-}
-
-void Render::step() {
-
-}
-
-void Render::render() {
+void VBORender::render() {
 
     step();
     glClear(GL_COLOR_BUFFER_BIT);
     draw();
-    checkGlError("Render::render");
+    checkGlError("VBORender::render");
 }
 //DrawPrimitiveWithoutVBOs(VERTICES, sizeof(GLfloat) * (VERTEX_POS_SIZE + VERTEX_COLOR_SIZE),3,INDICES);
 static void DrawPrimitiveWithoutVBOs(const GLfloat *vertices, GLint vtxStride, GLint numIndices,
@@ -186,7 +176,7 @@ static void DrawPrimitiveWithVBOs(UserData * userData,GLint numVertices, const G
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void Render::draw() {
+void VBORender::draw() {
 
 
 

@@ -12,9 +12,10 @@
 #include <jni.h>
 
 #include "VertexBufferObject/VertexBufferObject.h"
+#include "VertexBufferObjectGen3/VertexBufferObjectGen3.h"
 
 static Render * createRender(){
-    Render * render = new Render();
+    Render * render = new VBOGen3Render();
     if (!render->init()){
         delete render;
         return  NULL;

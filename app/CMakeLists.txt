@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-
+add_compile_options(-std=c++11)
 
 #如果当前系统版本过低设置拒绝编译
 if(${ANDROID_PLATFORM_LEVEL} LESS 11)
@@ -56,9 +56,10 @@ add_library(cube-lib
 add_library(exa-lib 
 			SHARED 
 			src/main/cpp/exa/esUtil.cpp
+			src/main/cpp/exa/VertexBufferObjectGen3/VertexBufferObjectGen3.cpp
 			src/main/cpp/exa/VertexBufferObject/VertexBufferObject.cpp
+			
 			src/main/cpp/exa/exa-lib.cpp)	
-
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library

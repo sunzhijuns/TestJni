@@ -33,5 +33,11 @@
         android:text="绘制立方体"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        app:layout_constraintTop_toBottomOf="@+id/btn_draw_cube"
+        android:id="@+id/btn_draw_exa"
+        android:text="绘制例子"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>

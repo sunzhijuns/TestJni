@@ -21,6 +21,7 @@
         <activity android:name=".triangle.TriangleActivity"/>
         <activity android:name=".rect.RectActivity"/>
         <activity android:name=".cube.CubeActivity"/>
+        <activity android:name=".exa.ExaActivity"/>
         <activity android:name=".NBitmapActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->

@@ -53,6 +53,10 @@ add_library(cube-lib
 			SHARED 
 			src/main/cpp/cube/esUtil.cpp
 			src/main/cpp/cube/cube-lib.cpp)	
+add_library(exa-lib 
+			SHARED 
+			src/main/cpp/exa/esUtil.cpp
+			src/main/cpp/exa/exa-lib.cpp)	
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -111,6 +115,13 @@ target_link_libraries(rect-lib
 			m)
 			
 target_link_libraries(cube-lib 
+			${OPENGL_LIB}
+			android
+			EGL
+			log
+			m)
+			
+target_link_libraries(exa-lib 
 			${OPENGL_LIB}
 			android
 			EGL

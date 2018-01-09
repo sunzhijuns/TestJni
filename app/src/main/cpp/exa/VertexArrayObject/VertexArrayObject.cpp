@@ -8,8 +8,9 @@
 #include <stdlib.h>
 
 #include <jni.h>
+#include <string.h>
 
-#define LOG_TAG "VAO-LIB"
+#define LOG_TAG "VAO|MAP-LIB"
 
 #include "../esUtil.h"
 
@@ -24,7 +25,6 @@ typedef struct{
 
 #define VERTEX_POS_SIZE     3
 #define VERTEX_COLOR_SIZE   4
-#define VERTEX_STRIDE (sizeof(GLfloat) * (VERTEX_POS_SIZE + VERTEX_COLOR_SIZE))
 
 #define VERTEX_POS_INDX 0
 #define VERTEX_COLOR_INDX 1
@@ -78,16 +78,61 @@ VAORender::VAORender(){
 static void initVAO(UserData * userData,GLint numVertices, const GLfloat **vtxBuf,const GLint * vtxStrides,
                     GLint numIndices, const GLushort *indices) {
 
+    GLfloat * vtxMappedBuf;
+    GLushort * idxMappedBuf;
+
     glGenBuffers(3,userData->vboIds);
 
+    //pos
     glBindBuffer(GL_ARRAY_BUFFER,userData->vboIds[0]);
-    glBufferData(GL_ARRAY_BUFFER,vtxStrides[0] * numVertices,vtxBuf[0],GL_STATIC_DRAW);
+//    glBufferData(GL_ARRAY_BUFFER,vtxStrides[0] * numVertices,vtxBuf[0],GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER,vtxStrides[0] * numVertices,NULL,GL_STATIC_DRAW);
+    vtxMappedBuf = (GLfloat *) glMapBufferRange(GL_ARRAY_BUFFER, 0, vtxStrides[0] * numVertices,
+                                        GL_MAP_WRITE_BIT|GL_MAP_INVALIDATE_BUFFER_BIT);
+    if(vtxMappedBuf == NULL){
+        checkGlError("glMapBufferRange Pos");
+        ALOGE("mapping pos buf error");
+        return;
+    }
+    memcpy(vtxMappedBuf,vtxBuf[0],vtxStrides[0] * numVertices);
+    if (glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE){
+        checkGlError("glUnmapBuffer Pos");
+        ALOGE("unmapping pos buf error");
+    }
 
+    //color
     glBindBuffer(GL_ARRAY_BUFFER,userData->vboIds[1]);
-    glBufferData(GL_ARRAY_BUFFER,vtxStrides[1] * numVertices,vtxBuf[1],GL_STATIC_DRAW);
+//    glBufferData(GL_ARRAY_BUFFER,vtxStrides[1] * numVertices,vtxBuf[1],GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER,vtxStrides[1] * numVertices,NULL,GL_STATIC_DRAW);
 
+    vtxMappedBuf = (GLfloat *) glMapBufferRange(GL_ARRAY_BUFFER, 0, vtxStrides[1] * numVertices,
+                                                GL_MAP_WRITE_BIT|GL_MAP_INVALIDATE_BUFFER_BIT);
+    if(vtxMappedBuf == NULL){
+        checkGlError("glMapBufferRange Color");
+        ALOGE("mapping color buf error");
+        return;
+    }
+    memcpy(vtxMappedBuf,vtxBuf[1],vtxStrides[1] * numVertices);
+    if (glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE){
+        checkGlError("glUnmapBuffer Color");
+        ALOGE("unmapping color buf error");
+    }
+    //index
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,userData->vboIds[2]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * numIndices,indices,GL_STATIC_DRAW);
+//    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * numIndices,indices,GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * numIndices,NULL,GL_STATIC_DRAW);
+    idxMappedBuf = (GLushort *) glMapBufferRange(GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(GLushort) * numIndices,
+                                        GL_MAP_WRITE_BIT|GL_MAP_INVALIDATE_BUFFER_BIT);
+    if(idxMappedBuf == NULL){
+        checkGlError("glMapBufferRange index");
+        ALOGE("mapping index buf error");
+        return;
+    }
+    memcpy(idxMappedBuf,indices,sizeof(GLushort) * numIndices);
+    if (glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER) == GL_FALSE){
+        checkGlError("glUnmapBuffer index");
+        ALOGE("unmapping index buf error");
+    }
 
     glGenVertexArrays(1, &userData->vaoId);
 

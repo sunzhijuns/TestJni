@@ -7,8 +7,6 @@
 
 #include <stdlib.h>
 
-
-
 #include <math.h>
 #include <time.h>
 #include <string.h>
@@ -59,11 +57,11 @@ const Vertex QUAD[4] = {
         {{ 0.7f,     0.7f},{0xFF,   0xFF,   0x00, 0x77}},
 };
 
-class Render{
+class RectRender{
 public:
     bool  init();
-    Render();
-    ~Render();
+    RectRender();
+    ~RectRender();
     void resize(int w, int h);
     void render();
 
@@ -85,7 +83,7 @@ private:
     void step();
 };
 
-Render::Render() :mLastFrameNs(0),
+RectRender::RectRender() :mLastFrameNs(0),
                   mVBState(0),
                   mProgram(0){
     memset(mScale,0, sizeof(mScale));
@@ -93,13 +91,13 @@ Render::Render() :mLastFrameNs(0),
         mVB[i] = 0;
     }
 }
-Render::~Render() {
+RectRender::~RectRender() {
     glDeleteVertexArrays(1,&mVBState);
     glDeleteBuffers(VB_COUNT, mVB);
     glDeleteProgram(mProgram);
 }
 
-bool Render::init() {
+bool RectRender::init() {
     mProgram = createProgram(VERTEX_SHADER, FRAGMENT_SHADER);
     if (!mProgram){
         ALOGE("mProgram 创建失败");
@@ -139,7 +137,7 @@ bool Render::init() {
     return true;
 }
 
-void Render::resize(int w, int h) {
+void RectRender::resize(int w, int h) {
     calcSceneParams(w,h);
     mAngles = float(drand48() * TWO_PI);
     mAngularVelocity = float(MAX_ROT_SPEED * (2.0 * drand48() - 1.0));
@@ -147,7 +145,7 @@ void Render::resize(int w, int h) {
     glViewport(0,0,w,h);
 }
 
-void Render::calcSceneParams(int w, int h) {
+void RectRender::calcSceneParams(int w, int h) {
     const float CELL_SIZE = 0.5f;
     const float scene2clip[2] = {
             1.0f, fmaxf(w,h) / fminf(w,h)
@@ -159,7 +157,7 @@ void Render::calcSceneParams(int w, int h) {
     mScale[minor] = CELL_SIZE * scene2clip[1];
 }
 
-void Render::step() {
+void RectRender::step() {
     timespec now;
     clock_gettime(CLOCK_MONOTONIC,&now);
     auto nowNs = now.tv_sec * 1000000000ull + now.tv_nsec;
@@ -186,34 +184,34 @@ void Render::step() {
     mLastFrameNs = nowNs;
 }
 
-void Render::render() {
+void RectRender::render() {
     step();
 
     glClearColor(0.2f, 0.2f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     draw();
-    checkGlError("Render::render");
+    checkGlError("RectRender::render");
 }
 
-float * Render::mapTransformBuf() {
+float * RectRender::mapTransformBuf() {
     glBindBuffer(GL_ARRAY_BUFFER, mVB[VB_SCALEROT]);
     return (float *) glMapBufferRange(GL_ARRAY_BUFFER,
                                       0, 4 * sizeof(float),
                                 GL_MAP_WRITE_BIT|GL_MAP_INVALIDATE_BUFFER_BIT);
 }
 
-void Render::unmapTransformBuf() {
+void RectRender::unmapTransformBuf() {
     glUnmapBuffer(GL_ARRAY_BUFFER);
 }
 
-void Render::draw() {
+void RectRender::draw() {
     glUseProgram(mProgram);
     glBindVertexArray(mVBState);
     glDrawArraysInstanced(GL_TRIANGLE_STRIP,0,4,1);
 }
 
-Render *createRenderer(){
-    Render * render = new  Render;
+RectRender *createRectRenderer(){
+    RectRender * render = new  RectRender;
     if (!render->init()){
         delete render;
         return NULL;
@@ -221,7 +219,7 @@ Render *createRenderer(){
     return render;
 }
 
-static Render * g_render = NULL;
+static RectRender * g_render = NULL;
 
 extern "C"
 JNIEXPORT jboolean JNICALL
@@ -231,7 +229,7 @@ Java_com_szj_testjni_rect_RectLib_init(JNIEnv *env, jclass type) {
         delete g_render;
         g_render = NULL;
     }
-    g_render = createRenderer();
+    g_render = createRectRenderer();
     if (!g_render){
         return JNI_FALSE;
     }

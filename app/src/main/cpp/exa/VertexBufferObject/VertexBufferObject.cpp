@@ -176,6 +176,10 @@ static void DrawPrimitiveWithVBOs(UserData * userData,GLint numVertices, const G
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+void VBORender::step() {
+
+}
+
 void VBORender::draw() {
 
 

@@ -13,6 +13,6 @@ public:
 
 protected:
     virtual void draw() = 0;
-    virtual void step() {}
+    virtual void step() = 0;
 };
 #endif //TESTJNI_PROTOL_H

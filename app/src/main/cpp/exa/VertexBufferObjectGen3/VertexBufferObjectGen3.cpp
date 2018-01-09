@@ -106,6 +106,10 @@ void VBOGen3Render::resize(int w, int h) {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
+void VBOGen3Render::step() {
+
+}
+
 
 void VBOGen3Render::render() {
 

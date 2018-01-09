@@ -19,6 +19,7 @@ public:
 protected:
 
     virtual void draw() override;
+    virtual void step() override;
     void calcSceneParams(int w, int h);
 };
 

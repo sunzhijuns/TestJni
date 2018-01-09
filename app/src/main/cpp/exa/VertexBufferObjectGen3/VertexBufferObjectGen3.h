@@ -18,6 +18,7 @@ public:
     virtual void render() override;
 
 protected:
+    virtual void step() override;
 
     virtual void draw() override ;
 };

@@ -69,6 +69,7 @@ add_library(exa-lib
 			src/main/cpp/exa/esUtil.cpp
 			src/main/cpp/exa/VertexBufferObjectGen3/VertexBufferObjectGen3.cpp
 			src/main/cpp/exa/VertexBufferObject/VertexBufferObject.cpp
+			src/main/cpp/exa/VertexArrayObject/VertexArrayObject.cpp
 			
 			src/main/cpp/exa/exa-lib.cpp)	
 # Searches for a specified prebuilt library and stores the path as a

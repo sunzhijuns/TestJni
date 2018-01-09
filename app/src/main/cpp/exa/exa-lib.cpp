@@ -13,9 +13,10 @@
 
 #include "VertexBufferObject/VertexBufferObject.h"
 #include "VertexBufferObjectGen3/VertexBufferObjectGen3.h"
+#include "VertexArrayObject/VertexArrayObject.h"
 
 static Render * createRender(){
-    Render * render = new VBOGen3Render();
+    Render * render = new VAORender();
     if (!render->init()){
         delete render;
         return  NULL;

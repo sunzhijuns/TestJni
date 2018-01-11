@@ -15,9 +15,10 @@
 #include "VertexBufferObjectGen3/VertexBufferObjectGen3.h"
 #include "VertexArrayObject/VertexArrayObject.h"
 #include "DrawElements/DrawElements.h"
+#include "SimpleVertexShader/SimpleVertexShader.h"
 
 static Render * createRender(){
-    Render * render = new DrawElementsRender();
+    Render * render = new SimpleVertexRender();
     if (!render->init()){
         delete render;
         return  NULL;

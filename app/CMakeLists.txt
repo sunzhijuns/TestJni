@@ -73,6 +73,7 @@ add_library(exa-lib
 			src/main/cpp/exa/SimpleVertexShader/SimpleVertexShader.cpp
 			src/main/cpp/exa/SimpleTexture2D/SimpleTexture2D.cpp
 			src/main/cpp/exa/MipMap2D/MipMap2D.cpp
+			src/main/cpp/exa/TextureWrap/TextureWrap.cpp
 			src/main/cpp/exa/DrawElements/DrawElements.cpp
 			
 			src/main/cpp/exa/exa-lib.cpp)	

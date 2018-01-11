@@ -18,9 +18,11 @@
 #include "SimpleVertexShader/SimpleVertexShader.h"
 #include "SimpleTexture2D/SimpleTexture2D.h"
 #include "MipMap2D/MipMap2D.h"
+#include "TextureWrap/TextureWrap.h"
 
 static Render * createRender(){
-    Render * render = new MipMap2DRender();
+//    Render * render = new MipMap2DRender();
+    Render * render = new TextureWrapRender();
     if (!render->init()){
         delete render;
         return  NULL;

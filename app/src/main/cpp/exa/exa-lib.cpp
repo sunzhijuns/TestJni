@@ -17,9 +17,10 @@
 #include "DrawElements/DrawElements.h"
 #include "SimpleVertexShader/SimpleVertexShader.h"
 #include "SimpleTexture2D/SimpleTexture2D.h"
+#include "MipMap2D/MipMap2D.h"
 
 static Render * createRender(){
-    Render * render = new SimpleTexture2DRender();
+    Render * render = new MipMap2DRender();
     if (!render->init()){
         delete render;
         return  NULL;

@@ -71,6 +71,7 @@ add_library(exa-lib
 			src/main/cpp/exa/VertexBufferObject/VertexBufferObject.cpp
 			src/main/cpp/exa/VertexArrayObject/VertexArrayObject.cpp
 			src/main/cpp/exa/SimpleVertexShader/SimpleVertexShader.cpp
+			src/main/cpp/exa/SimpleTexture2D/SimpleTexture2D.cpp
 			src/main/cpp/exa/DrawElements/DrawElements.cpp
 			
 			src/main/cpp/exa/exa-lib.cpp)	

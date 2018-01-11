@@ -16,9 +16,10 @@
 #include "VertexArrayObject/VertexArrayObject.h"
 #include "DrawElements/DrawElements.h"
 #include "SimpleVertexShader/SimpleVertexShader.h"
+#include "SimpleTexture2D/SimpleTexture2D.h"
 
 static Render * createRender(){
-    Render * render = new SimpleVertexRender();
+    Render * render = new SimpleTexture2DRender();
     if (!render->init()){
         delete render;
         return  NULL;

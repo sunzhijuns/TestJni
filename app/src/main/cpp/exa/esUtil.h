@@ -47,5 +47,7 @@ void esPerspective(ESMatrix *result, float fovy, float aspect, float nearZ, floa
 
 int esGenCube(float scale,GLfloat **vertices,
               GLfloat **normals,GLfloat **texCoords,GLuint **indices);
+int esGenSphere(int numSlices,float radius,GLfloat **vertices,
+                GLfloat **normals,GLfloat **texCoords,GLuint **indices);
 
 #endif //TESTJNI_ESUTIL_H

@@ -19,10 +19,11 @@
 #include "SimpleTexture2D/SimpleTexture2D.h"
 #include "MipMap2D/MipMap2D.h"
 #include "TextureWrap/TextureWrap.h"
+#include "SimpleTextureCube/SimpleTextureCube.h"
 
 static Render * createRender(){
 //    Render * render = new MipMap2DRender();
-    Render * render = new TextureWrapRender();
+    Render * render = new SimpleTextureCubeRender();
     if (!render->init()){
         delete render;
         return  NULL;

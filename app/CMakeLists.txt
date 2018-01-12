@@ -75,6 +75,7 @@ add_library(exa-lib
 			src/main/cpp/exa/MipMap2D/MipMap2D.cpp
 			src/main/cpp/exa/TextureWrap/TextureWrap.cpp
 			src/main/cpp/exa/DrawElements/DrawElements.cpp
+			src/main/cpp/exa/SimpleTextureCube/SimpleTextureCube.cpp
 			
 			src/main/cpp/exa/exa-lib.cpp)	
 # Searches for a specified prebuilt library and stores the path as a
